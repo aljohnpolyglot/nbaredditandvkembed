@@ -130,6 +130,79 @@
             padding: 20px;
             color: #aaa;
         }
+        /* =================================== */
+/* Responsive Styles for Tablet & Mobile */
+/* =================================== */
+
+/* Tablet and Smaller (e.g., iPad portrait, large phones in landscape/portrait) */
+@media (max-width: 1023px) {
+    .main-container {
+        flex-direction: column; /* Stack player and sidebar vertically */
+    }
+
+    .player-area {
+        width: 100%;
+        /* No fixed height for player-area; its height will be determined by player-wrapper's aspect ratio */
+        flex-grow: 0; /* Do not allow player-area to grow, its size is content-based */
+        flex-shrink: 0; /* Do not allow player-area to shrink beyond its content */
+    }
+
+    /* .player-wrapper already uses padding-top for aspect ratio, which is good. */
+    /* No changes needed for .player-wrapper or its iframe for this breakpoint,
+       as they will correctly adapt to the .player-area's 100% width. */
+
+    .sidebar {
+        width: 100%;        /* Sidebar takes full width */
+        flex-grow: 1;       /* Sidebar takes remaining vertical space */
+        height: 0;          /* Necessary for flex-grow to work correctly in a column with overflow-y */
+                            /* (effectively, remaining height after player-area) */
+        box-shadow: 0 -2px 5px rgba(0,0,0,0.2); /* Shadow on top to separate from player */
+        min-height: 250px;  /* Ensure chat has a minimum usable height */
+    }
+
+    .sidebar-header {
+        font-size: 1.1em; /* Slightly smaller header text */
+        padding: 12px;
+    }
+
+    /* chat-messages will naturally fill the space due to flex-grow on .sidebar */
+}
+
+/* Mobile (e.g., smaller phones in portrait) */
+@media (max-width: 480px) {
+    /* .player-area and .player-wrapper aspect ratio should still work fine.
+       If the player feels too large, you could adjust .player-wrapper's padding-top
+       for a different aspect ratio or set a max-height on .player-area,
+       but 16:9 is standard. */
+
+    .sidebar-header {
+        font-size: 1em;   /* Even smaller header text */
+        padding: 10px;
+    }
+
+    .chat-messages {
+        padding: 8px; /* Slightly less padding inside chat messages area */
+    }
+
+    .message {
+        font-size: 0.85em; /* Smaller text for messages */
+        padding: 6px 10px;
+    }
+
+    .message .author {
+        /* Author font size usually fine, but could be adjusted if needed */
+        /* font-size: 0.95em; */
+    }
+
+    .message .timestamp {
+        font-size: 0.7em; /* Smaller timestamp */
+    }
+
+    .status-message {
+        font-size: 0.9em;
+        padding: 15px;
+    }
+}
     </style>
 </head>
 <body>
